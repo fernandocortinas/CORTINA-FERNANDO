@@ -1,0 +1,1 @@
+window.CORTINA_INSTALL_CONFIG=null;

@@ -1,0 +1,19 @@
+CORTINA+ WEB — Acesso individual de FERNANDO
+
+1. Crie um projeto Cloudflare Pages com este diretório como conteúdo de publicação (diretório: .).
+2. Crie o D1 com nome cortina-fernando e execute o schema.sql no banco.
+3. Associe o binding D1 chamado DB ao projeto Pages, nas configurações de Functions.
+4. Configure duas variáveis do tipo SECRET no projeto Pages:
+   APP_PASSWORD = senha escolhida para FERNANDO (não escreva a senha nos arquivos publicados).
+   SESSION_SECRET = uma string longa e aleatória, diferente da senha.
+5. Faça um novo deploy após salvar os bindings e os secrets.
+6. Abra a URL HTTPS do Pages, usuário FERNANDO, senha definida no segredo.
+7. No iPhone Safari: Compartilhar > Adicionar à Tela de Início.
+   No Android Chrome: menu > Instalar aplicativo.
+
+ATENÇÃO: Não basta abrir index.html ou subir apenas arquivos estáticos no GitHub Pages. É necessário Cloudflare Pages Functions + D1.
+Dados são armazenados no D1, disponíveis em vários aparelhos. Acesso e sincronização requerem internet.
+Não importar automaticamente nenhum arquivo local do antigo computador: o primeiro acesso começa com configurações padrão; use um backup manual antigo quando necessário.
+Ao editar em dois dispositivos simultaneamente, a API bloqueia escrita de versão antiga; faça backup e recarregue para resolver.
+Limitação: dados são salvos como documento único, não há edição colaborativa simultânea. Faça backups regulares.
+O código não contém a senha. Não há hospedagem publicada automaticamente neste pacote.
