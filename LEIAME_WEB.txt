@@ -17,3 +17,16 @@ Não importar automaticamente nenhum arquivo local do antigo computador: o prime
 Ao editar em dois dispositivos simultaneamente, a API bloqueia escrita de versão antiga; faça backup e recarregue para resolver.
 Limitação: dados são salvos como documento único, não há edição colaborativa simultânea. Faça backups regulares.
 O código não contém a senha. Não há hospedagem publicada automaticamente neste pacote.
+
+
+ACESSOS V11.9.10
+ADMIN: senha inicial lida do Secret ADMIN_PASSWORD. Pode alterar a senha do FERNANDO pelo botão ADMIN na aplicação.
+FERNANDO: senha inicial do Secret APP_PASSWORD; após alteração pelo ADMIN, credencial protegida na tabela user_credentials do D1 prevalece.
+Ambos veem o mesmo banco de orçamentos, pedidos e estoque.
+No Cloudflare Pages / Production: criar ADMIN_PASSWORD, APP_PASSWORD, SESSION_SECRET como Secrets e vincular D1 como DB.
+Não use variáveis chamadas apenas ADMIN ou FERNANDO como senhas; elas não são lidas pelo login.
+EXECUTAR SQL NO CONSOLE D1 (uma vez):
+CREATE TABLE IF NOT EXISTS user_credentials (username TEXT PRIMARY KEY, salt TEXT NOT NULL, password_hash TEXT NOT NULL, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+Depois publicar o commit no GitHub e aguardar deploy de Production.
+RECOMENDADO: trocar a senha anteriormente exibida em captura de tela.
+OBS: a alteração da senha não revoga sessões existentes automaticamente; para revogá-las, rotacione SESSION_SECRET (desconecta todos).
