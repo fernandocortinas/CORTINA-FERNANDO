@@ -2,7 +2,7 @@ const enc=new TextEncoder();
 const json=(body,status=200,headers={})=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store',...headers}});
 const bytes=async s=>new Uint8Array(await crypto.subtle.digest('SHA-256',enc.encode(s)));
 const hex=b=>Array.from(b,x=>x.toString(16).padStart(2,'0')).join('');
-async function signingKey(secret){return crypto.subtle.importKey('raw',enc.encode(secret),'HMAC',false,['sign','verify']);}
+async function signingKey(secret){return crypto.subtle.importKey('raw',enc.encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign','verify']);}
 async function sign(value,secret){return hex(new Uint8Array(await crypto.subtle.sign('HMAC',await signingKey(secret),enc.encode(value))));}
 function cookie(request,name){return (request.headers.get('cookie')||'').split(';').map(x=>x.trim()).find(x=>x.startsWith(name+'='))?.split('=').slice(1).join('')||'';}
 async function session(request,env){
