@@ -1,0 +1,33 @@
+CORTINA+ WEB V11.9.12 — ATUALIZAÇÃO PARA GITHUB / CLOUDFLARE PAGES
+
+IMPORTANTE: FAÇA UM BACKUP ANTES DE PUBLICAR.
+
+ALTERAÇÕES
+- Menu lateral com rolagem e botão SAIR com encerramento de cookie no servidor.
+- Visualização de fotos em tela ampliada, ENVIAR via compartilhamento nativo ou baixar para WhatsApp Web, VOLTAR.
+- Agenda unificada: compromissos (VERDE) e instalações (LARANJA); eventos antigos vinculados a pedidos aparecem na agenda.
+- Visualizações mês, semana e dia; filtros; altura variável conforme os eventos.
+- Compromissos: horários de início/fim, status e telefone; alerta ao detectar conflitos entre compromissos.
+- Instalação: ABRIR PEDIDO (documento) e CONFIRMAR PELO WHATSAPP.
+- Corrigida divergência BANDÔ/BANDO entre o cadastro de persianas e o orçamento.
+- Conversão de orçamento bloqueia cliques repetidos e recusa novo pedido ativo para o mesmo orçamento.
+- No servidor, validação de duplicidade no salvamento do D1, respeitando duplicados históricos preexistentes.
+- Venda com insuficiência: pergunta antes de continuar, debita somente saldo disponível e registra falta no pedido.
+- Mantidos os logins, o esquema D1 existente e o controle de versão otimista de dados.
+
+COMO PUBLICAR
+1) Extraia o ZIP e envie o CONTEÚDO (não o próprio ZIP) para a raiz do repositório GitHub.
+2) Preserve a hierarquia das pastas functions/api.
+3) Commit sugerido: V11.9.12 - Agenda, estoque e correções WEB.
+4) Aguarde o Cloudflare Pages concluir o deploy.
+5) Faça um teste controlado com um orçamento e um pedido, sem dados reais de produção.
+
+NÃO EXECUTAR SQL: esta atualização não exige migrações no banco.
+
+LIMITAÇÕES / VERIFICAÇÕES NECESSÁRIAS
+- Os scripts passaram em verificação de sintaxe, mas não houve teste integrado real no Cloudflare/browser.
+- O salvamento continua assíncrono pelo web-client.js original. Confirme o indicador “Salvo na nuvem” antes de sair da página.
+- A proteção contra pedidos duplicados por orçamento utiliza também validação de estado na API; precisa ser testada com dois dispositivos.
+- A agenda usa as datas existentes de pedidos e instalações; eventos migrados não alteram registros históricos.
+- O compartilhamento direto do arquivo depende de suporte do navegador à Web Share API; no computador haverá download como alternativa.
+- O alerta de conflito aplica-se a compromissos sobrepostos (sem campo de instalador dedicado).
